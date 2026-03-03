@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gif</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-        }
-        video {
-            width: 100%;
-            height: 100vh;
-            display: block;
-            object-fit: cover;
-        }
-    </style>
-</head>
-<body>
-    <video id="myVideo" autoplay muted>
-        <source src="video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <script>
-        let video = document.getElementById('myVideo');
-        function unmuteVideo() {
-            video.muted = false;
-            video.play();
-            window.removeEventListener('click', unmuteVideo);
-        }
-        window.addEventListener('click', unmuteVideo);
-    </script>
-</body>
-</html>
+<video controls>
+  <source src="https://i.makeagif.com/media/3-03-2026/7pFdUR.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
