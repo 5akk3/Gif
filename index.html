@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Just the GIF</title>
-<style>
-html,body{
-    margin:0;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:black;
-}
-video{
-    width:100vw;
-    height:100vh;
-    object-fit:contain;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gif</title>
 </head>
 <body>
-<video autoplay muted loop>
-    <source src="https://i.makeagif.com/media/3-03-2026/7pFdUR.mp4" type="video/mp4">
-</video>
+    <video id="myVideo">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        let video = document.getElementById('myVideo');
+        function unmuteVideo() {
+            video.muted = false;
+            video.play();
+            // Removing the event listener to prevent it from running again
+            window.removeEventListener('click', unmuteVideo);
+        }
+        // Add event listener for unmuting on first user interaction
+        window.addEventListener('click', unmuteVideo);
+    </script>
 </body>
 </html>
