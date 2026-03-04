@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fullscreen Video</title>
+<title>Click to start video</title>
 
 <style>
 html, body {
@@ -15,15 +15,16 @@ html, body {
     overflow: hidden;
 }
 
+/* hidden at first */
 video {
     position: fixed;
     inset: 0;
-
     width: 100dvw;
     height: 100dvh;
-
     object-fit: cover;
     background: black;
+
+    display: none;
 }
 
 #overlay {
@@ -32,12 +33,13 @@ video {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.45);
+    background: black;
     color: white;
     font-family: system-ui, sans-serif;
     font-size: 1.4rem;
     cursor: pointer;
     user-select: none;
+    text-align: center;
 }
 </style>
 </head>
@@ -47,26 +49,31 @@ video {
     <source src="https://i.makeagif.com/media/3-03-2026/7pFdUR.mp4" type="video/mp4">
 </video>
 
-<div id="overlay">Tap to enable sound 🔊</div>
+<div id="overlay">Tap to start ▶️</div>
 
 <script>
 const video = document.getElementById("video");
 const overlay = document.getElementById("overlay");
 
-// try to start immediately (may be blocked with sound)
-video.muted = false;
+function startVideo() {
+    // reveal the video
+    video.style.display = "block";
 
-video.play().then(() => {
-    overlay.style.display = "none";
-}).catch(() => {
-    // waiting for user interaction
-});
-
-overlay.addEventListener("click", () => {
+    // enable sound
     video.muted = false;
+
+    // start playback
     video.play();
+
+    // remove overlay
     overlay.style.display = "none";
-});
+
+    overlay.removeEventListener("click", startVideo);
+    overlay.removeEventListener("touchstart", startVideo);
+}
+
+overlay.addEventListener("click", startVideo);
+overlay.addEventListener("touchstart", startVideo);
 </script>
 
 </body>
